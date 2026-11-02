@@ -11,16 +11,18 @@ screen.title("Pong")
 screen.listen()
 screen.tracer(0)
 
-player_one = Paddle((350,0))
-player_two = Paddle((-350,0))
+left_paddle = Paddle((-350,0))
+right_paddle = Paddle((350,0))
+left_paddle.left_paddle_size()
+right_paddle.right_paddle_size()
 ball = Ball()
 scoreboard = Scoreboard()
 
-screen.onkey(player_one.move_up, "Up")
-screen.onkey(player_one.move_down, "Down")
+screen.onkey(left_paddle.move_up, "w")
+screen.onkey(left_paddle.move_down, "s")
 
-screen.onkey(player_two.move_up, "w")
-screen.onkey(player_two.move_down, "s")
+screen.onkey(right_paddle.move_up, "Up")
+screen.onkey(right_paddle.move_down, "Down")
 
 game_is_on = True
 
@@ -31,9 +33,9 @@ while game_is_on:
 
     if ball.ycor() > 280 or ball.ycor() < -280:
         ball.bounce_y()
-    elif ball.distance(player_one) < 50 and ball.xcor() > 320:
+    elif ball.distance(left_paddle) < 50 and ball.xcor() < -320:
         ball.bounce_x()
-    elif ball.distance(player_two) < 50 and ball.xcor() < -320:
+    elif ball.distance(right_paddle) < 300 and ball.xcor() > 320:
         ball.bounce_x()
     elif ball.xcor() > 400:
         ball.reset()
